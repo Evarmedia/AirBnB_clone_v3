@@ -11,7 +11,7 @@ from api.v1.views import app_views
 app = Flask(__name__)
 
 """Enabling cors and allowing origins."""
-CORS(app, resources={r'/api/v1/*': {'origins': '0.0.0.0'}})
+CORS(app, resources={'/*': {'origins': '0.0.0.0'}})
 
 """Register the blueprint app_views to Flask instance app."""
 app.register_blueprint(app_views)
