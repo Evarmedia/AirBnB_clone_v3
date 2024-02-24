@@ -9,4 +9,5 @@ from models import storage
 @app_views.route('/status')
 def status():
     """Returns a JSON response for RESTful Api."""
-    return jsonify(status="OK")
+    response = {'status': 'OK'}
+    return jsonify(response)
