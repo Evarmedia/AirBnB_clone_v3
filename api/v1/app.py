@@ -9,16 +9,15 @@ from models import storage
 from api.v1.views import app_views
 
 """Creatingg a variable app instance of Flask."""
-
 app = Flask(__name__)
 """Creatingg a variable app instance of Flask."""
-HOST = os.getenv('HBNB_API_HOST', '0.0.0.0')
-PORT = int(os.getenv('HBNB_API_PORT', '5000'))
+app_host = os.getenv('HBNB_API_HOST', '0.0.0.0')
+app_host = int(os.getenv('HBNB_API_PORT', '5000'))
 """Enforce strict trally slashes on routes."""
 app.url_map.strict_slashes = False
 """Register the blueprint app_views to Flask instance app."""
 app.register_blueprint(app_views)
-CORS(app, resources={'/*': {'origins': HOST}})
+CORS(app, resources={'/*': {'origins': app_host}})
 
 @app.teardown_appcontext
 def teardown_engine(exception):
@@ -28,10 +27,10 @@ def teardown_engine(exception):
 
 if __name__ == "__main__":
 
-    HOST = os.getenv('HBNB_API_HOST', '0.0.0.0')
-    PORT = int(os.getenv('HBNB_API_PORT', 5000))
+    app_host = os.getenv('HBNB_API_HOST', '0.0.0.0')
+    app_host = int(os.getenv('HBNB_API_PORT', 5000))
     app.run(
-        host=HOST,
-        port=PORT,
+        host=app_host,
+        port=app_host,
         threaded=True
         )
