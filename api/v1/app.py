@@ -20,7 +20,7 @@ app.url_map.strict_slashes = False
 app.register_blueprint(app_views)
 CORS(app, resources={'/*': {'origins': HOST}})
 
-
+@app.teardown_appcontext
 def teardown_engine(exception):
     """Remove current SQLAlchemy session object after each request."""
     storage.close()
