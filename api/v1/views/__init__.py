@@ -2,8 +2,10 @@
 """Creating a blueprint for the Api."""
 
 from flask import Blueprint
+
+# import all views from index module
 from api.v1.views.index import *
 
 
+# Creating a Blueprint instance with url prefix /api/v1
 app_views = Blueprint('app_views', __name__, url_prefix='/api/v1')
-
