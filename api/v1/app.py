@@ -17,7 +17,8 @@ app_host = int(os.getenv('HBNB_API_PORT', '5000'))
 app.url_map.strict_slashes = False
 """Register the blueprint app_views to Flask instance app."""
 app.register_blueprint(app_views)
-CORS(app, resources={'/*': {'origins': app_host}})
+CORS(app, resources={r'/api/v1/*': {'origins': '0.0.0.0'}})
+
 
 @app.teardown_appcontext
 def teardown_engine(exception):
