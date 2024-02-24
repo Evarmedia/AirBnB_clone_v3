@@ -17,10 +17,10 @@ CORS(app, resources={r'/api/v1/*': {'origins': '0.0.0.0'}})
 app.register_blueprint(app_views)
 
 """Enforce strict trally slashes on routes."""
-app_url_map.strict_slashes = False
+app.url_map.strict_slashes = False
 
 
-def teardown_engine(Exception):
+def teardown_engine(exception):
     """Remove current SQLAlchemy session object after each request."""
     storage.close()
 
