@@ -49,8 +49,6 @@ def add_user():
     if 'password' not in data:
         abort(400, 'Missing password in JSON data')
 
-    # Additional validation logic for email format can be added here
-
     user = User(**data)
     user.save()
     return jsonify(user.to_dict()), 201
