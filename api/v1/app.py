@@ -3,7 +3,7 @@
 Createw Flask app; and register the blueprint app_views to Flask instance app.
 '''
 
-from os import getenv
+from os import environ
 from flask import Flask, jsonify
 from flask_cors import CORS
 from models import storage
@@ -19,7 +19,7 @@ app.url_map.strict_slashes = False
 
 
 @app.teardown_appcontext
-def teardown_appcontext(code):
+def teardown_appcontext(exception):
     '''
     Removes the current SQLAlchemy Session object after each request.
     '''
@@ -37,6 +37,6 @@ def not_found(error):
 
 
 if __name__ == '__main__':
-    HOST = getenv('HBNB_API_HOST', '0.0.0.0')
-    PORT = int(getenv('HBNB_API_PORT', 5000))
+    HOST = environ.get('HBNB_API_HOST', '0.0.0.0')
+    PORT = int(environ.get('HBNB_API_PORT', 5000))
     app.run(host=HOST, port=PORT, threaded=True)
