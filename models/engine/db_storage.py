@@ -12,7 +12,6 @@ from models.review import Review
 from models.state import State
 from models.user import User
 from os import getenv
-import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
@@ -52,14 +51,14 @@ class DBStorage:
         return (new_dict)
 
     def get(self, cls, id):
-        """retrieves an object of a class with id"""
+        ''' A method to retrieve one object '''
         obj = None
         if cls is not None and issubclass(cls, BaseModel):
             obj = self.__session.query(cls).filter(cls.id == id).first()
         return obj
 
     def count(self, cls=None):
-        """retrieves the number of objects of a class or all (if cls==None)"""
+        ''' Returns the number of objects in storage of given class '''
         return len(self.all(cls))
 
     def new(self, obj):

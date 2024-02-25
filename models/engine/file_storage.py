@@ -35,20 +35,16 @@ class FileStorage:
         return self.__objects
 
     def get(self, cls, id):
-        """retrieves an object of a class with id"""
+        ''' A method to retrieve one object '''
         if cls is not None:
-            res = list(
-                filter(
-                    lambda x: type(x) is cls and x.id == id,
-                    self.__objects.values()
-                )
-            )
-            if res:
-                return res[0]
+            result = list(filter(lambda x: type(x) is cls and x.id == id,
+                          self.__objects.values()))
+            if result:
+                return result[0]
         return None
 
     def count(self, cls=None):
-        """retrieves the number of objects of a class or all (if cls==None)"""
+        ''' Returns the number of objects in storage for given class '''
         return len(self.all(cls))
 
     def new(self, obj):

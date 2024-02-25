@@ -1,36 +1,31 @@
 #!/usr/bin/python3
-'''Contains the index view for the API.'''
+"""Views for Airbnb Api."""
 from flask import jsonify
-
 from api.v1.views import app_views
 from models import storage
-from models.amenity import Amenity
-from models.city import City
-from models.place import Place
-from models.review import Review
-from models.state import State
-from models.user import User
 
 
-@app_views.route('/status')
-def get_status():
-    '''Gets the status of the API.
-    '''
-    return jsonify(status='OK')
+# Create route /status on the object app_views
+@app_views.route('/status' methods=['GET'], strict_slashes=False)
+def status():
+    """Returns a JSON response for RESTful Api."""
+    response = {"status": "OK"}
+    return jsonify(response)
 
-
-@app_views.route('/stats')
+@app_views.route('/stats', methods=['GET'], strict_slashes=False)
 def get_stats():
-    '''Gets the number of objects for each type.
-    '''
-    objects = {
-        'amenities': Amenity,
-        'cities': City,
-        'places': Place,
-        'reviews': Review,
-        'states': State,
-        'users': User
+    """
+    Retrieves the number of each objects by type.
+    """
+    stats = {
+        'amenities': storage.count('Amenity'),
+        'cities': storage.count('City'),
+        'places': storage.count('Place'),
+        'reviews': storage.count('Review'),
+        'states': storage.count('State'),
+        'users': storage.count('User')
     }
-    for key, value in objects.items():
-        objects[key] = storage.count(value)
-    return jsonify(objects)
+    return jsonify(stats)
+
+if __name__ == "__main__": 
+    pass
