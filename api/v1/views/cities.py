@@ -14,8 +14,7 @@ def get_all_cities(state_id):
     state = storage.get(State, state_id)
     if not state:
         return abort(404)
-    else:
-        cities_list = [city.to_dict() for city in state.cities]
+    cities_list = [city.to_dict() for city in state.cities]
     return jsonify(cities_list)
 
 
@@ -49,11 +48,12 @@ def delete_city(city_id):
 def add_city(state_id):
     """If the request data is not in JSON format
        and if 'name' key is missing in the JSON
-       data return error 400.Otherwise add new State
+       data return error 400.Otherwise add new City
        object with the JSON data
     """
+    state = storage.get(State, state_id)
     data = request.get_json()
-    if not data or 'name' not in data:
+    if not state or not data or 'name' not in data:
         abort(400, 'Not a JSON or Missing name')
 
     city = City(**data)
