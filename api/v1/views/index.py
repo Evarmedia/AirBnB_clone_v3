@@ -6,7 +6,7 @@ from models import storage
 
 
 # Create route /status on the object app_views
-@app_views.route('/status' methods=['GET'], strict_slashes=False)
+@app_views.route('/status', strict_slashes=False)
 def status():
     """Returns a JSON response for RESTful Api."""
     response = {"status": "OK"}
