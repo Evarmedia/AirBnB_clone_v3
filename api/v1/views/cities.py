@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from flask import abort, jsonify, request
 from models.state import State
 from models.city import City
