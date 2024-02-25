@@ -82,7 +82,7 @@ def update_city(city_id):
         abort(400, 'Not a JSON')
 
     """Update the attributes of the State object with the JSON data."""
-    ignore_keys = ['id', 'created_at', 'updated_at']
+    ignore_keys = ['id', 'state_id','created_at', 'updated_at']
     for key, value in data.items():
         if key not in ignore_keys:
             setattr(city, key, value)
