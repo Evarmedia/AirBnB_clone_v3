@@ -40,8 +40,16 @@ def delete_user(user_id):
 def add_user():
     """Add a new user object."""
     data = request.get_json()
-    if not data or 'email' not in data or 'password' not in data:
-        abort(400, 'Not a JSON or Missing email or Missing password')
+    if not data:
+        abort(400, 'Invalid JSON data')
+
+    if 'email' not in data:
+        abort(400, 'Missing email in JSON data')
+
+    if 'password' not in data:
+        abort(400, 'Missing password in JSON data')
+
+    # Additional validation logic for email format can be added here
 
     user = User(**data)
     user.save()
@@ -57,7 +65,7 @@ def update_user(user_id):
 
     data = request.get_json()
     if not data:
-        abort(400, 'Not a JSON')
+        abort(400, 'Invalid JSON data')
 
     ignore_keys = ['id', 'email', 'created_at', 'updated_at']
     for key, value in data.items():
