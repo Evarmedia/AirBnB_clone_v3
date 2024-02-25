@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""State objects that handles all default RESTFul API actions."""
+
 from flask import abort, jsonify, request
 from models.state import State
 from models.city import City
@@ -71,3 +73,24 @@ def update_city(city_id):
 
     city.save()
     return jsonify(city.to_dict()), 200
+
+
+"""Error Handlers."""
+
+
+@app_views.errorhandler(404)
+def not_found(error):
+    """
+    Returns a JSON response for 404 error (Not Found).
+    """
+    response = {'error': 'Not found'}
+    return jsonify(response), 404
+
+
+@app_views.errorhandler(400)
+def bad_request(error):
+    """
+    Returns a JSON response for 400 error (Bad Request).
+    """
+    response = {'error': 'Bad Request'}
+    return jsonify(response), 400
