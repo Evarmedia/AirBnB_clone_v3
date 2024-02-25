@@ -29,11 +29,8 @@ def teardown_appcontext(exception):
 # Error handlers for expected app behavior
 @app.errorhandler(404)
 def not_found(error):
-    '''
-    Return errmsg `Not Found`.
-    '''
-    response = {'error': 'Not found'}
-    return jsonify(response), 404
+    '''Return errmsg `Not Found`.'''
+    return jsonify(error='Not found'), 404
 
 
 if __name__ == '__main__':
