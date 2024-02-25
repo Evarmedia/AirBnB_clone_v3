@@ -10,7 +10,6 @@ from api.v1.views import app_views
 
 @app_views.route('/states', methods=['GET'], strict_slashes=False)
 def get_all_states():
-    def get_all_states():
     """Get all states objects from the storage."""
     states = storage.all(State).values()
     """Convert the object to dict and JSON."""
