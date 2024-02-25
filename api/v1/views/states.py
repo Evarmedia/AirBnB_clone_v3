@@ -50,11 +50,11 @@ def add_state():
        data return error 400.Otherwise add new State
        object with the JSON data
     """
-    data = requset.get_json()
+    data = request.get_json()
     if not data or 'name' not in data:
-        abort(404)
+        abort(400, 'Not a JSON or Missing name')
 
-    state = State(** data)
+    state = State(**data)
     state.save()
     """ Return the newly created State object
         in JSON format with 201 status code.
