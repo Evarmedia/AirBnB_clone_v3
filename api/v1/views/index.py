@@ -12,9 +12,6 @@ def status():
     response = {'status': 'OK'}
     return jsonify(response)
 
-if __name__ == "__main__":
-    pass
-
 @app_views.route('/stats', methods=['GET'])
 def get_stats():
     """
@@ -30,3 +27,5 @@ def get_stats():
     }
     return jsonify(stats)
 
+if __name__ == "__main__": 
+    pass
