@@ -12,7 +12,8 @@ def get_all_states():
     """Get all states objects from the storage."""
     states = storage.all(State).values()
     """Convert the object to dict and JSON."""
-    state_list = [state.to_dict for state in states]
+    state_list = [state.to_dict() for state in states]
+
     return jsonify(state_list)
 
 
