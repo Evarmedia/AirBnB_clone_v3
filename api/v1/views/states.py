@@ -8,18 +8,9 @@ from models import storage
 from api.v1.views import app_views
 
 
-ALLOWED_METHODS = ['GET', 'DELETE', 'POST', 'PUT']
-'''methods allowed for state endpoints'''
-
-
-@app_views.route('/states', methods=ALLOWED_METHODS, strict_slashes=False)
+@app_views.route('/states', methods=['GET'], strict_slashes=False)
 def get_all_states():
-    """Get all states objects from the storage."""
-    states = storage.all(State).values()
-    """Convert the object to dict and JSON."""
-    state_list = [state for state in states]
-
-    return jsonify(state_list.to_dict())
+    return 'HELLO'
 
 
 @app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
