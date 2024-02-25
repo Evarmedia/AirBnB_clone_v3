@@ -45,7 +45,7 @@ def create_city(state_id):
         abort(404)
 
     data = request.get_json()
-    
+
     if not request.json:
         abort(400, 'Not a JSON')
 
