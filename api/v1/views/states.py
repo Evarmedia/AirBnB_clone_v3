@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """State objects that handles all default RESTFul API actions."""
-from werkzeug.exceptions import NotFound, MethodNotAllowed, BadRequest
 
 from flask import abort, jsonify, request
 from models.state import State
