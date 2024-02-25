@@ -8,6 +8,10 @@ from models import storage
 from api.v1.views import app_views
 
 
+ALLOWED_METHODS = ['GET', 'DELETE', 'POST', 'PUT']
+'''methods allowed for state endpoints'''
+
+
 @app_views.route('/states', methods=ALLOWED_METHODS, strict_slashes=False)
 def get_all_states():
     """Get all states objects from the storage."""
