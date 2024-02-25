@@ -17,9 +17,9 @@ def get_all_states():
     """Get all states objects from the storage."""
     states = storage.all(State).values()
     """Convert the object to dict and JSON."""
-    state_list = [state.to_dict() for state in states]
+    state_list = [state for state in states]
 
-    return jsonify(state_list)
+    return jsonify(state_list.to_dict())
 
 
 @app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
