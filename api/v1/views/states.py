@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """State objects that handles all default RESTFul API actions."""
+from werkzeug.exceptions import NotFound, MethodNotAllowed, BadRequest
 
 from flask import abort, jsonify, request
 from models.state import State
@@ -7,7 +8,7 @@ from models import storage
 from api.v1.views import app_views
 
 
-@app_views.route('/states', methods=['GET'], strict_slashes=False)
+@app_views.route('/states', methods=ALLOWED_METHODS, strict_slashes=False)
 def get_all_states():
     """Get all states objects from the storage."""
     states = storage.all(State).values()
