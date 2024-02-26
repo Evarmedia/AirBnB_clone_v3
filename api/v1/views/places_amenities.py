@@ -8,8 +8,7 @@ from models.place import Place
 from models.amenity import Amenity
 from api.v1.views import app_views
 
-@app_views.route('/places/<place_id>/amenities', methods=['GET'],
-                 strict_slashes=False)
+@app_views.route('/places/<place_id>/amenities', methods=['GET'])
 def get_place_amenities(place_id):
     place = storage.get(Place, place_id)
     if not place:
@@ -35,8 +34,7 @@ def delete_place_amenity(place_id, amenity_id):
     storage.save()
     return jsonify({}), 200
 
-@app_views.route('/places/<place_id>/amenities/<amenity_id>', methods=['POST'],
-                 strict_slashes=False)
+@app_views.route('/places/<place_id>/amenities/<amenity_id>', methods=['POST'])
 def link_place_amenity(place_id, amenity_id):
     place = storage.get(Place, place_id)
     if not place:
