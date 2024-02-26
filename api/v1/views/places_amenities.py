@@ -2,7 +2,7 @@
 ''' a new view for the link between Place objects and Amenity objects that 
 handles all default RESTFul API actions: '''
 
-from flask import Flask, jsonify, request, abort
+from flask import Flask, jsonify, abort
 from models import storage
 from models.place import Place
 from models.amenity import Amenity
