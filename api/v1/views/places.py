@@ -45,7 +45,7 @@ def delete_a_place(place_id):
                  strict_slashes=False)
 def create_place(city_id):
     city = storage.get(City, city_id)
-    user = storage.get(User, user_id)
+    user = storage.get(User)
 
     if city is None:
         abort(404)
