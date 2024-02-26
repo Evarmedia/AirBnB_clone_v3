@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+''' a new view for Review object that handles all
+default RESTFul API actions'''
+
 from flask import Flask, jsonify, request, abort
 from api.v1.views import app_views
 from models import storage
