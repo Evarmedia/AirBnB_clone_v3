@@ -129,13 +129,15 @@ def search_places():
             if city:
                 place_ids.add(city.id)
 
-        places = [storage.get(Place, place_id) for place_id in place_ids if storage.get(Place, place_id)]
+        places = [storage.get(Place, place_id)
+                  for place_id in place_ids if storage.get(Place, place_id)]
 
     # Filter places based on d_amenities
     if d_amenities:
         filtered_places = []
         for place in places:
-            if all(amenity_id in place.d_amenities for amenity_id in d_amenities):
+            if all(amenity_id in place.d_amenities
+                   for amenity_id in d_amenities):
                 filtered_places.append(place)
         places = filtered_places
 
