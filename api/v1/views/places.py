@@ -22,7 +22,7 @@ def get_all_places(city_id):
     return jsonify(places)
 
 
-@app_views.route('/places/<place_id>', methods=['GET'],
+@app_views.route('/places/<string:place_id>', methods=['GET'],
                  strict_slashes=False)
 def get_single_place(place_id):
     ''' Returns a single place'''
@@ -33,14 +33,14 @@ def get_single_place(place_id):
     return jsonify(place.to_dict())
 
 
-@app_views.route('/places/<place_id>', methods=['DELETE'])
+@app_views.route('/places/<string:place_id>', methods=['DELETE'])
 def delete_a_place(place_id):
     ''' Delete a place'''
     place = storage.get(Place, place_id)
     if place is None:
         abort(404)
 
-    storage.delete(place)
+    place.delete()
     storage.save()
     return jsonify({}), 200
 
