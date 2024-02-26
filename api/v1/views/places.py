@@ -99,51 +99,6 @@ def update_place(place_id):
 """Error Handlers."""
 
 
-@app_views.route('/places_search', methods=['POST'])
-def search_places():
-    # Check if request body is valid JSON
-    if not request.is_json:
-        abort(400, description="Not a JSON")
-
-    # Parse JSON body
-    data = request.get_json()
-
-    # Extract optional keys
-    d_states = data.get('d_states', [])
-    d_cities = data.get('d_cities', [])
-    d_amenities = data.get('d_amenities', [])
-
-    # Retrieve all places if the lists are empty
-    if not d_states and not d_cities:
-        places = storage.all(Place).values()
-    else:
-        # Retrieve places based on d_states and d_cities
-        place_ids = set()
-        for state_id in d_states:
-            state = storage.get(State, state_id)
-            if state:
-                place_ids.update([city.id for city in state.d_cities])
-
-        for city_id in d_cities:
-            city = storage.get(City, city_id)
-            if city:
-                place_ids.add(city.id)
-
-        places = [storage.get(Place, place_id)
-                  for place_id in place_ids if storage.get(Place, place_id)]
-
-    # Filter places based on d_amenities
-    if d_amenities:
-        filtered_places = []
-        for place in places:
-            if all(amenity_id in place.d_amenities
-                   for amenity_id in d_amenities):
-                filtered_places.append(place)
-        places = filtered_places
-
-    return jsonify([place.to_dict() for place in places])
-
-
 @app_views.errorhandler(404)
 def not_found(error):
     """
