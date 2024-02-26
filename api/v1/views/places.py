@@ -5,12 +5,11 @@ from flask import abort, jsonify, request
 from models.place import Place
 from models.city import City
 from models.user import User
-from models.state import State
 from models import storage
 from api.v1.views import app_views
 
 
-@app_views.route('/d_cities/<city_id>/places', methods=['GET'],
+@app_views.route('/cities/<city_id>/places', methods=['GET'],
                  strict_slashes=False)
 def get_all_places(city_id):
     ''' Get all places in the specified city'''
@@ -46,7 +45,7 @@ def delete_a_place(place_id):
     return jsonify({}), 200
 
 
-@app_views.route('/d_cities/<city_id>/places', methods=['POST'],
+@app_views.route('/cities/<city_id>/places', methods=['POST'],
                  strict_slashes=False)
 def create_place(city_id):
     ''' Create a new place'''
