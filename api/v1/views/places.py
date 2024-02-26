@@ -94,45 +94,7 @@ def update_place(place_id):
     place.save()
     return jsonify(place.to_dict()), 200
 
-''' adv task to search for places'''
-@app_views.route('/places_search', Methods=['POST'],
-                 strict_slashes=False)
-def search_places_request():
-    if request.get_json() is not None:
-        args = request.get_json()
-        states = args.get('states', [])
-        cities = args.get('cities', [])
-        amenities = args.get('amenities', [])
-        amenity_obj = []
-        for amenity_id in amenities:
-            amenity = storage.get('Amenity', amenity_id)
-            if amenity:
-                amenity_obj.append(amenity)
-        if states == cities == []:
-            places = storage.get('Place').values()
-        else:
-            places = []
-            for state_id in states:
-                state = storage.get('State', state_id)
-                state_cities = state.cities
-                for city in state_cities:
-                    if city.id not in cities:
-                        cities.append(city.id)
-            for city_id in cities:
-                city = storage.get('City', city_id)
-                for place in city.places:
-                    places.append(place)
-        gotten_places = []
-        for place in places:
-            place_amenities = place.amenities
-            gotten_places.append(place.to_dict())
-            for amenity in amenity_obj:
-                if amenity not in place_amenities:
-                    gotten_places.pop()
-                    break
-        return jsonify(gotten_places)
-    else:
-        abort(400, 'Not a JSON')
+
 """Error Handlers."""
 
 
