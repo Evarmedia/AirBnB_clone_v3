@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-''' a new view for the link between Place objects and Amenity objects that 
+''' a new view for the link between Place objects and Amenity objects that
 handles all default RESTFul API actions: '''
 
 from flask import Flask, jsonify, abort
@@ -7,6 +7,7 @@ from models import storage
 from models.place import Place
 from models.amenity import Amenity
 from api.v1.views import app_views
+
 
 @app_views.route('/places/<place_id>/amenities', methods=['GET'])
 def get_place_amenities(place_id):
@@ -17,7 +18,9 @@ def get_place_amenities(place_id):
     amenities = [amenity.to_dict() for amenity in place.amenities]
     return jsonify(amenities)
 
-@app_views.route('/places/<place_id>/amenities/<amenity_id>', methods=['DELETE'])
+
+@app_views.route('/places/<place_id>/amenities/<amenity_id>',
+                 methods=['DELETE'])
 def delete_place_amenity(place_id, amenity_id):
     place = storage.get(Place, place_id)
     if not place:
@@ -33,6 +36,7 @@ def delete_place_amenity(place_id, amenity_id):
     place.amenities.remove(amenity)
     storage.save()
     return jsonify({}), 200
+
 
 @app_views.route('/places/<place_id>/amenities/<amenity_id>', methods=['POST'])
 def link_place_amenity(place_id, amenity_id):
