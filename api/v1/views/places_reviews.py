@@ -65,7 +65,7 @@ def create_review(place_id):
 
     user = storage.get('User', data['user_id'])
 
-    if user is not None:
+    if user is None:
         abort(404)
 
     if 'text' not in data:
