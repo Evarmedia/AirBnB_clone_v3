@@ -10,7 +10,7 @@ from models.place import Place
 from models.user import User
 
 
-@app_views.route('/places/<place_id>/reviews', methods=['GET']
+@app_views.route('/places/<place_id>/reviews', methods=['GET'],
                  strict_slashes=False)
 def get_reviews_by_place(place_id):
     ''' Return a list of reviews for the given place_id.'''
